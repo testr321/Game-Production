@@ -1227,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1019061216545120246, guid: 9143b4d4309fd5a4a813ef0d989a4e6b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8.48
       objectReference: {fileID: 0}
     - target: {fileID: 1019061216545120246, guid: 9143b4d4309fd5a4a813ef0d989a4e6b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1277,14 +1277,6 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 868945754}
-    - target: {fileID: 1019061216545120250, guid: 9143b4d4309fd5a4a813ef0d989a4e6b, type: 3}
-      propertyPath: maxSpeed
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019061216545120250, guid: 9143b4d4309fd5a4a813ef0d989a4e6b, type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
