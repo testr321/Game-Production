@@ -39,6 +39,7 @@ public class Tutorial : MonoBehaviour
             {
                 tutorial1.SetActive(false);
                 tutorial2.SetActive(true);
+                playerScriptTutorial.first = true;
                 stage++;
             }
             else if (stage == 1)

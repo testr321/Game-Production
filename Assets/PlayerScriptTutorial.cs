@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerScriptTutorial : MonoBehaviour
 {
     public bool start;
+    public bool first;
 
     public float maxTimer;
     public float minSpeed;
@@ -34,7 +35,7 @@ public class PlayerScriptTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseMenu.gameIsPaused)
+        if (PauseMenu.gameIsPaused || !first)
             return;
 
         gameObject.transform.localScale = CalScale();
