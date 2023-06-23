@@ -32,6 +32,9 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.gameIsPaused)
+            return;
+
         gameObject.transform.localScale = CalScale();
         moveSpeed = CalSpeed();
         // if (joystick.Horizontal != 0 || joystick.Vertical != 0)

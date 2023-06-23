@@ -44,8 +44,9 @@ public class LightBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (freeze)
+        if (freeze || PauseMenu.gameIsPaused)
             return;
+
         gameObject.transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
         gameObject.transform.position += direction * movementSpeed * Time.deltaTime;
 

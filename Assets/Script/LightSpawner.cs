@@ -11,6 +11,7 @@ public class LightSpawner : MonoBehaviour
     public float decreaseDelay;
     public float minMoveSpeed;
     public float maxMoveSpeed;
+    public int maxLightBar;
     int minRotation = 0;
     int maxRotation = 91;
     Camera mainCam;
@@ -34,10 +35,11 @@ public class LightSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (freeze)
+        if (freeze || PauseMenu.gameIsPaused)
             return;
 
-        if (nextSpawnTime <= Time.time)
+        int lightBarCount = GameObject.FindGameObjectsWithTag("Light Bar").Length;
+        if (nextSpawnTime <= Time.time && lightBarCount < maxLightBar)
         {
             SpawnLightBar();
             nextSpawnTime = Time.time + spawnDelay;

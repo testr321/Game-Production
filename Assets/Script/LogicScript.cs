@@ -6,6 +6,13 @@ using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
+    [SerializeField] GameObject animatedTextPrefab;
+    [SerializeField] GameObject canvas;
+    [SerializeField] float defaultCooldown;
+    [SerializeField] TextMeshProUGUI defaultTextColour;
+    [SerializeField] TextMeshProUGUI greenTextColour;
+    [SerializeField] TextMeshProUGUI redTextColour;
+
     public bool freeze;
     public bool end = true;
     public PlayerScript pScript;
@@ -18,18 +25,20 @@ public class LogicScript : MonoBehaviour
     public float timer;
     public static float score = 0;
     bool firstTouch = true;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+    bool red;
+    bool green;
+    float cooldown;
 
     // Update is called once per frame
     void Update()
     {
         UpdateTexts();
-        if (freeze)
+        if (freeze || PauseMenu.gameIsPaused)
             return;
+
+        red = false;
+        green = false;
 
         if (timer <= 0)
         {
@@ -45,6 +54,9 @@ public class LogicScript : MonoBehaviour
         }
         UpdatePlayer();
         TouchReduce();
+        
+        if (cooldown > 0)
+            cooldown -= Time.deltaTime;
     }
 
     void UpdatePlayer()
@@ -57,41 +69,59 @@ public class LogicScript : MonoBehaviour
 
         if (pScript.collided == 0)
         {
+            green = true;
             timer += Time.deltaTime;
             score += Time.deltaTime;
             return;
         }
         else if (pScript.collided < 0)
-            Debug.Log("collided count less than 0: " + pScript.collided);
+            Debug.LogError("collided count less than 0: " + pScript.collided);
 
+        red = true;
         timer -= stayTime * Time.deltaTime;
     }
 
     void UpdateTexts()
     {
-        if (timer < 0)
-            timerText.text = "0";
+        if (red)
+            timerText.color = redTextColour.color;
         else
-            timerText.text = timer.ToString("F0");
-        scoreText.text = score.ToString("F0");
+            timerText.color = defaultTextColour.color;
+
+        timerText.text = Mathf.Ceil(timer).ToString();
+        if (green)
+            scoreText.color = greenTextColour.color;
+        else
+            scoreText.color = defaultTextColour.color;
+        scoreText.text = Mathf.Ceil(score).ToString();
     }
 
     public void BorderReduce()
     {
         timer -= bounceTime;
+        SpawnAnimatedText("-" + bounceTime.ToString());
     }
 
     public void TouchReduce()
     {
         if (!pScript.invis && firstTouch && pScript.collided > 0)
         {
+            Debug.Log("touch reduce");
             timer -= touchTime;
+            SpawnAnimatedText("-" + touchTime.ToString());
             firstTouch = false;
         }
 
-        if (pScript.collided == 0)
+        if (pScript.collided == 0 && cooldown <= 0)
         {
+            cooldown = defaultCooldown;
             firstTouch = true;
         }
+    }
+
+    void SpawnAnimatedText(string value)
+    {
+        GameObject animatedText = Instantiate(animatedTextPrefab, canvas.transform);
+        animatedText.GetComponent<TextMeshProUGUI>().text = value;
     }
 }
