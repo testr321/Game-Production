@@ -1496,7 +1496,7 @@ MonoBehaviour:
   decreaseDelay: 0.1
   minMoveSpeed: 1
   maxMoveSpeed: 5
-  maxLightBar: 4
+  maxLightBar: 6
 --- !u!1 &507114521
 GameObject:
   m_ObjectHideFlags: 0
