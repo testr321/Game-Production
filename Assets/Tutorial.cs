@@ -39,12 +39,14 @@ public class Tutorial : MonoBehaviour
             {
                 tutorial1.SetActive(false);
                 tutorial2.SetActive(true);
+                continueText.SetActive(true);
                 playerScriptTutorial.first = true;
                 stage++;
             }
             else if (stage == 1)
             {
                 tutorial2.SetActive(false);
+                continueText.SetActive(true);
                 tutorial3.SetActive(true);
                 lightBar.transform.position = Vector3.zero;
                 stage++;

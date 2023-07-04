@@ -57,6 +57,7 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         Resume();
+        LogicScript.score = 0;
         SceneManager.LoadScene(0);
     }
 }
